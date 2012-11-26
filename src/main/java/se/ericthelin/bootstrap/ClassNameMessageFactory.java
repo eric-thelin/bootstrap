@@ -1,9 +1,9 @@
 package se.ericthelin.bootstrap;
 
-class ClassNameMessageCatalog implements MessageCatalog {
+class ClassNameMessageFactory implements MessageFactory {
 
     @Override
-    public String messageFor(Class<?> c) {
+    public String createMessage(Class<?> c) {
 	return messageFor(getMessagePartOf(c.getSimpleName()));
     }
 
@@ -27,5 +27,4 @@ class ClassNameMessageCatalog implements MessageCatalog {
 
 	return result.toString();
     }
-
 }

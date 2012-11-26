@@ -11,12 +11,12 @@ import org.junit.Test;
 public class NullArgumentExceptionTest {
 
     @Test
-    public void getsMessageFromCatalog() {
-	MessageCatalog catalog = mock(MessageCatalog.class);
-	MessageUtility.use(catalog);
+    public void getsMessageFromFactory() {
+	MessageFactory factory = mock(MessageFactory.class);
+	MessageUtility.use(factory);
 
-	given(catalog.messageFor(NullArgumentException.class))
-		.willReturn("foo");
+	given(factory.createMessage(NullArgumentException.class)).willReturn(
+		"foo");
 
 	assertThat(new NullArgumentException().getMessage(), is(equalTo("foo")));
     }

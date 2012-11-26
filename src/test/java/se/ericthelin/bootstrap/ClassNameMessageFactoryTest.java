@@ -6,16 +6,16 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class ClassNameMessageCatalogTest {
+public class ClassNameMessageFactoryTest {
 
     @Test
     public void messageIsDerivedFromClassName() {
-	MessageCatalog catalog = new ClassNameMessageCatalog();
+	MessageFactory factory = new ClassNameMessageFactory();
 
-	assertThat(catalog.messageFor(NullArgumentException.class),
+	assertThat(factory.createMessage(NullArgumentException.class),
 		is(equalTo("Null argument")));
 
-	assertThat(catalog.messageFor(IllegalStateException.class),
+	assertThat(factory.createMessage(IllegalStateException.class),
 		is(equalTo("Illegal state")));
     }
 

@@ -14,21 +14,21 @@ import org.junit.Test;
 
 public class MessageUtilityTest {
 
-    private MessageCatalog catalog;
+    private MessageFactory factory;
 
     @Before
     public void setUp() {
-	catalog = mock(MessageCatalog.class);
-	MessageUtility.use(catalog);
+	factory = mock(MessageFactory.class);
+	MessageUtility.use(factory);
     }
 
     @Test(expected = NullArgumentException.class)
-    public void throwsWhenUsingNullCatalog() {
+    public void throwsWhenUsingNullFactory() {
 	MessageUtility.use(null);
     }
 
     @Test
-    public void returnsMessageEvenIfNoCatalogHasBeenConfigured() {
+    public void returnsMessageEvenIfNoFactoryHasBeenConfigured() {
 	MessageUtility.reset();
 
 	assertThat(MessageUtility.messageFor(NullArgumentException.class),
@@ -41,9 +41,9 @@ public class MessageUtilityTest {
     }
 
     @Test
-    public void throwsWhenCatalogThrows() {
+    public void throwsWhenFactoryThrows() {
 	Exception exception = anException();
-	given(catalog.messageFor(any(Class.class))).willThrow(exception);
+	given(factory.createMessage(any(Class.class))).willThrow(exception);
 
 	try {
 	    MessageUtility.messageFor(MessageUtility.class);
@@ -59,8 +59,9 @@ public class MessageUtilityTest {
 
     @Test
     public void returnsClassSpecificMessages() {
-	given(catalog.messageFor(MessageUtility.class)).willReturn("A message");
-	given(catalog.messageFor(MessageUtilityTest.class)).willReturn(
+	given(factory.createMessage(MessageUtility.class)).willReturn(
+		"A message");
+	given(factory.createMessage(MessageUtilityTest.class)).willReturn(
 		"Another message");
 
 	assertThat(MessageUtility.messageFor(MessageUtility.class),

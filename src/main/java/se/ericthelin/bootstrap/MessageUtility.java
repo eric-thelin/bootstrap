@@ -4,17 +4,17 @@ import static se.ericthelin.bootstrap.ArgumentUtility.verifyNotNull;
 
 public class MessageUtility {
 
-    private static MessageCatalog catalog = new ClassNameMessageCatalog();
+    private static MessageFactory factory = new ClassNameMessageFactory();
 
     public static String messageFor(Class<?> c) {
-	return catalog.messageFor(verifyNotNull(c));
+	return factory.createMessage(verifyNotNull(c));
     }
 
-    public static void use(MessageCatalog catalog) {
-	MessageUtility.catalog = verifyNotNull(catalog);
+    public static void use(MessageFactory catalog) {
+	MessageUtility.factory = verifyNotNull(catalog);
     }
 
     static void reset() {
-	catalog = new ClassNameMessageCatalog();
+	factory = new ClassNameMessageFactory();
     }
 }
