@@ -46,6 +46,11 @@ public class FluentMessageDescription implements MessageDescription {
     }
 
     @Override
+    public boolean hasArguments() {
+	return !arguments.isEmpty();
+    }
+
+    @Override
     public Object getArgument(String name) {
 	if (!argumentsByName.containsKey(name)) {
 	    throw new MissingArgumentException(this, name);

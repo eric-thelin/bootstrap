@@ -35,7 +35,7 @@ public class MessageUtilityTest {
 	assertThat(
 		MessageUtility
 			.createMessage(identifiedBy(NullArgumentException.class)),
-		is(equalTo("Null argument")));
+		is(equalTo("<no arguments>")));
     }
 
     @Test(expected = NullArgumentException.class)

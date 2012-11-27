@@ -6,6 +6,8 @@ public interface MessageDescription {
 
     String getIdentifier();
 
+    boolean hasArguments();
+
     Object getArgument(String name);
 
     List<MessageArgument> getArguments();
