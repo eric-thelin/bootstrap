@@ -37,6 +37,6 @@ public class MessageEndToEndTest {
 		new ParameterMappingMessageFactory()));
 
 	assertThat(new NullArgumentException().getMessage(),
-		is(equalTo("<no arguments>")));
+		is(equalTo(NullArgumentException.class.getName())));
     }
 }

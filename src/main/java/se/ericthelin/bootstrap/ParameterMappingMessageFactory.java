@@ -5,9 +5,10 @@ public class ParameterMappingMessageFactory implements MessageFactory {
     @Override
     public String createMessage(MessageDescription description) {
 	if (!description.hasArguments()) {
-	    return "<no arguments>";
+	    return description.getIdentifier();
 	}
-	StringBuilder builder = new StringBuilder();
+	StringBuilder builder = new StringBuilder(description.getIdentifier());
+	builder.append(": ");
 
 	boolean tail = false;
 	for (MessageArgument argument : description.getArguments()) {

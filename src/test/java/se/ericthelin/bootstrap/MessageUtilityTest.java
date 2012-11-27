@@ -2,6 +2,7 @@ package se.ericthelin.bootstrap;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -32,10 +33,8 @@ public class MessageUtilityTest {
     public void returnsMessageEvenIfNoFactoryHasBeenConfigured() {
 	MessageUtility.reset();
 
-	assertThat(
-		MessageUtility
-			.createMessage(identifiedBy(NullArgumentException.class)),
-		is(equalTo("<no arguments>")));
+	assertThat(MessageUtility.createMessage(identifiedBy("id")),
+		is(notNullValue()));
     }
 
     @Test(expected = NullArgumentException.class)
