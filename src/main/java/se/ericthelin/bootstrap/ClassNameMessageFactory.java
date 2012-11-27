@@ -4,8 +4,15 @@ class ClassNameMessageFactory implements MessageFactory {
 
     @Override
     public String createMessage(MessageDescription description) {
-	return messageFor(getMessagePartOf(description.getIdentifier()
-		.getSimpleName()));
+	StringBuilder builder = new StringBuilder();
+	builder.append(messageFor(getMessagePartOf(description.getIdentifier()
+		.getSimpleName())));
+
+	for (MessageArgument argument : description.getArguments()) {
+	    builder.append(" ").append(argument);
+	}
+
+	return builder.toString();
     }
 
     private String getMessagePartOf(String name) {
