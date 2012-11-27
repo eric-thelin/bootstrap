@@ -1,6 +1,6 @@
 package se.ericthelin.bootstrap;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface MessageDescription {
 
@@ -8,6 +8,6 @@ public interface MessageDescription {
 
     Object getArgument(String name);
 
-    Collection<MessageArgument> getArguments();
+    List<MessageArgument> getArguments();
 
 }

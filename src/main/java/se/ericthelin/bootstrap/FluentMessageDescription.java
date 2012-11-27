@@ -2,9 +2,10 @@ package se.ericthelin.bootstrap;
 
 import static se.ericthelin.bootstrap.ArgumentUtility.verifyNotNull;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FluentMessageDescription implements MessageDescription {
@@ -18,7 +19,8 @@ public class FluentMessageDescription implements MessageDescription {
     }
 
     private final String identifier;
-    private final Map<String, MessageArgument> parameters = new HashMap<String, MessageArgument>();
+    private final Map<String, MessageArgument> argumentsByName = new HashMap<String, MessageArgument>();
+    private final List<MessageArgument> arguments = new ArrayList<>();
 
     private FluentMessageDescription(String identifier) {
 	this.identifier = verifyNotNull(identifier);
@@ -37,21 +39,22 @@ public class FluentMessageDescription implements MessageDescription {
     }
 
     public FluentMessageDescription havingParameter(String name, Object value) {
-	this.parameters.put(name, new MessageArgument(name, value));
-
+	MessageArgument argument = new MessageArgument(name, value);
+	this.argumentsByName.put(name, argument);
+	this.arguments.add(argument);
 	return this;
     }
 
     @Override
     public Object getArgument(String name) {
-	if (!parameters.containsKey(name)) {
+	if (!argumentsByName.containsKey(name)) {
 	    throw new MissingArgumentException(this, name);
 	}
-	return parameters.get(name).getValue();
+	return argumentsByName.get(name).getValue();
     }
 
     @Override
-    public Collection<MessageArgument> getArguments() {
-	return Collections.unmodifiableCollection(parameters.values());
+    public List<MessageArgument> getArguments() {
+	return Collections.unmodifiableList(arguments);
     }
 }
