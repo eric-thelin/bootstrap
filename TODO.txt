@@ -1,7 +1,7 @@
 Add null checks to ClassNameMessageFactory
 FluentMessageDecription.equals should handle any value
 FluentMessageDecription.hashCode
-Change type of MessageDescription.getIdentifier to String?
 Remove implementation of MessageDescription from FluentMessageDecription?
 Exception on adding same parameter twice to FluentMessageDecription
 Throw when getting missing parameter from FluentMessageDecription
+Replace ClassNameMessageFactory with missing mapping factory?

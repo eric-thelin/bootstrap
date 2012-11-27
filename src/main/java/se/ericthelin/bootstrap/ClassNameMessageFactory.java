@@ -5,8 +5,7 @@ class ClassNameMessageFactory implements MessageFactory {
     @Override
     public String createMessage(MessageDescription description) {
 	StringBuilder builder = new StringBuilder();
-	builder.append(messageFor(getMessagePartOf(description.getIdentifier()
-		.getSimpleName())));
+	builder.append(messageFor(getMessagePartOf(description.getIdentifier())));
 
 	for (MessageArgument argument : description.getArguments()) {
 	    builder.append(" ").append(argument);
@@ -16,7 +15,8 @@ class ClassNameMessageFactory implements MessageFactory {
     }
 
     private String getMessagePartOf(String name) {
-	return name.substring(0, name.lastIndexOf("Exception"));
+	return name.substring(name.lastIndexOf(".") + 1,
+		name.lastIndexOf("Exception"));
     }
 
     private String messageFor(String name) {

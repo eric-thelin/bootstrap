@@ -13,15 +13,15 @@ public class FluentMessageDescription implements MessageDescription {
 	return new FluentMessageDescription(identifier);
     }
 
-    private final Class<?> identifier;
+    private final String identifier;
     private final Map<String, MessageArgument> parameters = new HashMap<String, MessageArgument>();
 
     private FluentMessageDescription(Class<?> identifier) {
-	this.identifier = verifyNotNull(identifier);
+	this.identifier = verifyNotNull(identifier).getName();
     }
 
     @Override
-    public Class<?> getIdentifier() {
+    public String getIdentifier() {
 	return identifier;
     }
 

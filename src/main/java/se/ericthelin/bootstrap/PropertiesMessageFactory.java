@@ -20,12 +20,12 @@ public class PropertiesMessageFactory implements MessageFactory {
 
     @Override
     public String createMessage(MessageDescription description) {
-	if (!properties.containsKey(description.getIdentifier().getName())) {
+	if (!properties.containsKey(description.getIdentifier())) {
 	    return delegate.createMessage(description);
 	}
 
 	String messageTemplate = properties.getProperty(description
-		.getIdentifier().getName());
+		.getIdentifier());
 
 	return replaceParameters(messageTemplate, description);
     }

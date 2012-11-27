@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface MessageDescription {
 
-    Class<?> getIdentifier();
+    String getIdentifier();
 
     Object getArgument(String name);
 
