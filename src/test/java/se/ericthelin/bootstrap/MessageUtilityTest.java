@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static se.ericthelin.bootstrap.FluentMessageDescription.identifiedBy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,9 @@ public class MessageUtilityTest {
     public void returnsMessageEvenIfNoFactoryHasBeenConfigured() {
 	MessageUtility.reset();
 
-	assertThat(MessageUtility.createMessage(NullArgumentException.class),
+	assertThat(
+		MessageUtility
+			.createMessage(identifiedBy(NullArgumentException.class)),
 		is(equalTo("Null argument")));
     }
 
@@ -46,7 +49,7 @@ public class MessageUtilityTest {
 	given(factory.createMessage(any(Class.class))).willThrow(exception);
 
 	try {
-	    MessageUtility.createMessage(MessageUtility.class);
+	    MessageUtility.createMessage(identifiedBy(MessageUtility.class));
 	    fail("No exception thrown");
 	} catch (Exception e) {
 	    assertThat(e, is(sameInstance(exception)));
@@ -64,9 +67,13 @@ public class MessageUtilityTest {
 	given(factory.createMessage(MessageUtilityTest.class)).willReturn(
 		"Another message");
 
-	assertThat(MessageUtility.createMessage(MessageUtility.class),
+	assertThat(
+		MessageUtility
+			.createMessage(identifiedBy(MessageUtility.class)),
 		is(equalTo("A message")));
-	assertThat(MessageUtility.createMessage(MessageUtilityTest.class),
+	assertThat(
+		MessageUtility
+			.createMessage(identifiedBy(MessageUtilityTest.class)),
 		is(equalTo("Another message")));
     }
 }
