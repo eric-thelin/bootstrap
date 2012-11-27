@@ -41,14 +41,12 @@ public class PropertiesMessageFactoryTest {
     @Test
     public void replacesPlaceholdersWithActualValues() {
 	Properties properties = new Properties();
-	properties.put(PropertiesMessageFactory.class.getName(),
-		"Message: a='${a}', b='${b}'");
+	properties.put("id", "Message: a='${a}', b='${b}'");
 
 	PropertiesMessageFactory factory = new PropertiesMessageFactory(
 		properties, mock(MessageFactory.class));
 	assertThat(
-		factory.createMessage(identifiedBy(
-			PropertiesMessageFactory.class).havingParameter("a",
+		factory.createMessage(identifiedBy("id").havingParameter("a",
 			"foo").havingParameter("b", "bar")),
 		is(equalTo("Message: a='foo', b='bar'")));
     }

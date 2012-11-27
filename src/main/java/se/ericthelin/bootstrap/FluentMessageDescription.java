@@ -10,14 +10,18 @@ import java.util.Map;
 public class FluentMessageDescription implements MessageDescription {
 
     public static FluentMessageDescription identifiedBy(Class<?> identifier) {
+	return new FluentMessageDescription(verifyNotNull(identifier).getName());
+    }
+
+    public static FluentMessageDescription identifiedBy(String identifier) {
 	return new FluentMessageDescription(identifier);
     }
 
     private final String identifier;
     private final Map<String, MessageArgument> parameters = new HashMap<String, MessageArgument>();
 
-    private FluentMessageDescription(Class<?> identifier) {
-	this.identifier = verifyNotNull(identifier).getName();
+    private FluentMessageDescription(String identifier) {
+	this.identifier = verifyNotNull(identifier);
     }
 
     @Override

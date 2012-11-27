@@ -50,7 +50,7 @@ public class MessageUtilityTest {
 		exception);
 
 	try {
-	    MessageUtility.createMessage(identifiedBy(MessageUtility.class));
+	    MessageUtility.createMessage(identifiedBy("id"));
 	    fail("No exception thrown");
 	} catch (Exception e) {
 	    assertThat(e, is(sameInstance(exception)));
@@ -63,8 +63,8 @@ public class MessageUtilityTest {
 
     @Test
     public void returnsClassSpecificMessages() {
-	MessageDescription firstDescription = identifiedBy(MessageUtility.class);
-	MessageDescription secondDescription = identifiedBy(MessageUtilityTest.class);
+	MessageDescription firstDescription = identifiedBy("id-1");
+	MessageDescription secondDescription = identifiedBy("id-2");
 
 	given(factory.createMessage(firstDescription)).willReturn("A message");
 	given(factory.createMessage(secondDescription)).willReturn(
