@@ -7,8 +7,7 @@ public class MessageUtility {
     private static MessageFactory factory = new ClassNameMessageFactory();
 
     public static String createMessage(MessageDescription description) {
-	return factory
-		.createMessage(verifyNotNull(description).getIdentifier());
+	return factory.createMessage(verifyNotNull(description));
     }
 
     public static void use(MessageFactory catalog) {

@@ -14,12 +14,12 @@ public class PropertiesMessageFactory implements MessageFactory {
     }
 
     @Override
-    public String createMessage(Class<?> c) {
-	if (!properties.containsKey(c.getName())) {
-	    return delegate.createMessage(c);
+    public String createMessage(MessageDescription description) {
+	if (!properties.containsKey(description.getIdentifier().getName())) {
+	    return delegate.createMessage(description);
 	}
 
-	return properties.getProperty(c.getName());
+	return properties.getProperty(description.getIdentifier().getName());
     }
 
 }

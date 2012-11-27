@@ -46,7 +46,8 @@ public class MessageUtilityTest {
     @Test
     public void throwsWhenFactoryThrows() {
 	Exception exception = anException();
-	given(factory.createMessage(any(Class.class))).willThrow(exception);
+	given(factory.createMessage(any(MessageDescription.class))).willThrow(
+		exception);
 
 	try {
 	    MessageUtility.createMessage(identifiedBy(MessageUtility.class));
@@ -62,18 +63,16 @@ public class MessageUtilityTest {
 
     @Test
     public void returnsClassSpecificMessages() {
-	given(factory.createMessage(MessageUtility.class)).willReturn(
-		"A message");
-	given(factory.createMessage(MessageUtilityTest.class)).willReturn(
+	MessageDescription firstDescription = identifiedBy(MessageUtility.class);
+	MessageDescription secondDescription = identifiedBy(MessageUtilityTest.class);
+
+	given(factory.createMessage(firstDescription)).willReturn("A message");
+	given(factory.createMessage(secondDescription)).willReturn(
 		"Another message");
 
-	assertThat(
-		MessageUtility
-			.createMessage(identifiedBy(MessageUtility.class)),
+	assertThat(MessageUtility.createMessage(firstDescription),
 		is(equalTo("A message")));
-	assertThat(
-		MessageUtility
-			.createMessage(identifiedBy(MessageUtilityTest.class)),
+	assertThat(MessageUtility.createMessage(secondDescription),
 		is(equalTo("Another message")));
     }
 }

@@ -18,4 +18,11 @@ public class FluentMessageDescription implements MessageDescription {
     public Class<?> getIdentifier() {
 	return identifier;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+	MessageDescription other = (MessageDescription) obj;
+
+	return identifier.equals(other.getIdentifier());
+    }
 }

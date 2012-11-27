@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static se.ericthelin.bootstrap.FluentMessageDescription.identifiedBy;
 
 import org.junit.Test;
 
@@ -15,8 +16,8 @@ public class NullArgumentExceptionTest {
 	MessageFactory factory = mock(MessageFactory.class);
 	MessageUtility.use(factory);
 
-	given(factory.createMessage(NullArgumentException.class)).willReturn(
-		"foo");
+	given(factory.createMessage(identifiedBy(NullArgumentException.class)))
+		.willReturn("foo");
 
 	assertThat(new NullArgumentException().getMessage(), is(equalTo("foo")));
     }

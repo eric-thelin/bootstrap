@@ -3,8 +3,9 @@ package se.ericthelin.bootstrap;
 class ClassNameMessageFactory implements MessageFactory {
 
     @Override
-    public String createMessage(Class<?> c) {
-	return messageFor(getMessagePartOf(c.getSimpleName()));
+    public String createMessage(MessageDescription description) {
+	return messageFor(getMessagePartOf(description.getIdentifier()
+		.getSimpleName()));
     }
 
     private String getMessagePartOf(String name) {
