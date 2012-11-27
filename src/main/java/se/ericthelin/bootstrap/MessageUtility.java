@@ -4,7 +4,7 @@ import static se.ericthelin.bootstrap.ArgumentUtility.verifyNotNull;
 
 public class MessageUtility {
 
-    private static MessageFactory factory = new ParameterMappingMessageFactory();
+    private static MessageFactory factory = new MessageDescriptionMessageFactory();
 
     public static String createMessage(MessageDescription description) {
 	return factory.createMessage(verifyNotNull(description));
@@ -15,6 +15,6 @@ public class MessageUtility {
     }
 
     static void reset() {
-	factory = new ParameterMappingMessageFactory();
+	factory = new MessageDescriptionMessageFactory();
     }
 }

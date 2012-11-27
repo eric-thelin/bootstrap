@@ -23,7 +23,7 @@ public class MessageEndToEndTest {
 		"Argument is null");
 
 	MessageUtility.use(new PropertiesMessageFactory(properties,
-		new ParameterMappingMessageFactory()));
+		new MessageDescriptionMessageFactory()));
 
 	assertThat(new NullArgumentException().getMessage(),
 		is(equalTo("Argument is null")));
@@ -34,7 +34,7 @@ public class MessageEndToEndTest {
 	Properties properties = new Properties();
 
 	MessageUtility.use(new PropertiesMessageFactory(properties,
-		new ParameterMappingMessageFactory()));
+		new MessageDescriptionMessageFactory()));
 
 	assertThat(new NullArgumentException().getMessage(),
 		is(equalTo(NullArgumentException.class.getName())));

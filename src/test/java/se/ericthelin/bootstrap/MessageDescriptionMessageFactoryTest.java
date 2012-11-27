@@ -7,11 +7,11 @@ import static se.ericthelin.bootstrap.FluentMessageDescription.identifiedBy;
 
 import org.junit.Test;
 
-public class ParameterMappingMessageFactoryTest {
+public class MessageDescriptionMessageFactoryTest {
 
     @Test
     public void echoesDescription() {
-	ParameterMappingMessageFactory factory = new ParameterMappingMessageFactory();
+	MessageDescriptionMessageFactory factory = new MessageDescriptionMessageFactory();
 
 	assertThat(factory.createMessage(identifiedBy("id")), is(equalTo("id")));
 	assertThat(

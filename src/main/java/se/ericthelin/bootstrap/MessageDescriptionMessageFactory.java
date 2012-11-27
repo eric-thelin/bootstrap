@@ -1,6 +1,6 @@
 package se.ericthelin.bootstrap;
 
-public class ParameterMappingMessageFactory implements MessageFactory {
+public class MessageDescriptionMessageFactory implements MessageFactory {
 
     @Override
     public String createMessage(MessageDescription description) {
