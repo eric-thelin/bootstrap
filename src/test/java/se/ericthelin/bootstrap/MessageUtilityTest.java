@@ -31,13 +31,13 @@ public class MessageUtilityTest {
     public void returnsMessageEvenIfNoFactoryHasBeenConfigured() {
 	MessageUtility.reset();
 
-	assertThat(MessageUtility.messageFor(NullArgumentException.class),
+	assertThat(MessageUtility.createMessage(NullArgumentException.class),
 		is(equalTo("Null argument")));
     }
 
     @Test(expected = NullArgumentException.class)
     public void throwsWhenClassIsNull() {
-	MessageUtility.messageFor(null);
+	MessageUtility.createMessage(null);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class MessageUtilityTest {
 	given(factory.createMessage(any(Class.class))).willThrow(exception);
 
 	try {
-	    MessageUtility.messageFor(MessageUtility.class);
+	    MessageUtility.createMessage(MessageUtility.class);
 	    fail("No exception thrown");
 	} catch (Exception e) {
 	    assertThat(e, is(sameInstance(exception)));
@@ -64,9 +64,9 @@ public class MessageUtilityTest {
 	given(factory.createMessage(MessageUtilityTest.class)).willReturn(
 		"Another message");
 
-	assertThat(MessageUtility.messageFor(MessageUtility.class),
+	assertThat(MessageUtility.createMessage(MessageUtility.class),
 		is(equalTo("A message")));
-	assertThat(MessageUtility.messageFor(MessageUtilityTest.class),
+	assertThat(MessageUtility.createMessage(MessageUtilityTest.class),
 		is(equalTo("Another message")));
     }
 }

@@ -1,12 +1,12 @@
 package se.ericthelin.bootstrap;
 
-import static se.ericthelin.bootstrap.MessageUtility.messageFor;
+import static se.ericthelin.bootstrap.MessageUtility.createMessage;
 
 class NullArgumentException extends IllegalArgumentException {
 
     private static final long serialVersionUID = 1L;
 
     public NullArgumentException() {
-	super(messageFor(NullArgumentException.class));
+	super(createMessage(NullArgumentException.class));
     }
 }
